@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03. Minion Names", "03. Min
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04. Add Minion", "04. Add Minion\04. Add Minion.csproj", "{57DF4233-BA98-44FC-BA55-4FD3D1A55CAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05. ChangeTownNamesCasing", "05. ChangeTownNamesCasing\05. ChangeTownNamesCasing.csproj", "{AC8DDF2B-875F-45A7-9DED-A4D17A8A2FBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "05. ChangeTownNamesCasing", "05. ChangeTownNamesCasing\05. ChangeTownNamesCasing.csproj", "{AC8DDF2B-875F-45A7-9DED-A4D17A8A2FBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06. Remove Villain", "06. Remove Villain\06. Remove Villain.csproj", "{21724717-3A87-4693-ABC4-FE3AC4C9D52B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "06. Remove Villain", "06. Remove Villain\06. Remove Villain.csproj", "{21724717-3A87-4693-ABC4-FE3AC4C9D52B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "08. Increase Minion Age", "08. Increase Minion Age\08. Increase Minion Age.csproj", "{4887D8FF-6866-420E-86F0-97D198ADB900}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{21724717-3A87-4693-ABC4-FE3AC4C9D52B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21724717-3A87-4693-ABC4-FE3AC4C9D52B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21724717-3A87-4693-ABC4-FE3AC4C9D52B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4887D8FF-6866-420E-86F0-97D198ADB900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4887D8FF-6866-420E-86F0-97D198ADB900}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4887D8FF-6866-420E-86F0-97D198ADB900}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4887D8FF-6866-420E-86F0-97D198ADB900}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
