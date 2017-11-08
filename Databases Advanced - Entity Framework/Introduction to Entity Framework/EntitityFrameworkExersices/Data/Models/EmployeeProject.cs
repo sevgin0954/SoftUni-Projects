@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace EntitityFrameworkExersices.Data.Models
+﻿namespace EntitityFrameworkExersices.Data.Models
 {
     public partial class EmployeeProject
     {

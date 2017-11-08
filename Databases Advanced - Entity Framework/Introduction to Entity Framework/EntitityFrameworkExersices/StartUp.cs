@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Globalization;
 using EntitityFrameworkExersices.Data;
 using EntitityFrameworkExersices.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EntitityFrameworkExersices
 {
@@ -10,23 +12,37 @@ namespace EntitityFrameworkExersices
         static void Main()
         {
             SoftUniContext context = new SoftUniContext();
-
+            
             // 03. Employees Full Information
             PrintEmployeeesFullInfo(context);
-
+            
             // 04. Employees with Salary Over 50 000
             PrintEmpployeesWithSalaryOver(context, 50000);
-
+            
             // 05. Employees from Research and Development
             PrintEmployeesFromDepartment(context, "Research and Development");
-
+            
             // 06. Adding a New Address and Updating Employee
             AddAddress(context, "Vitoshka 15", 4);
             int addressId = FindAddressId(context, "Vitoshka 15");
             ChangeEmployeeAddress(context, "Nakov", addressId);
-
+            
             PrintAddressTextForFirst10Employees(context);
-
+            
+            // 07. Employees and Projects
+            Print30EmployeesWithProjects(context, 2001, 2003);
+            
+            // 08. Addresses by Town
+            PrintTop10AdressesOrdered(context);
+            
+            // 09. Employee 147
+            GetEmployeeInfoById(context, 147);
+            
+            // 10.	Departments with More Than 5 Employees
+            PrintDepartmentWithMoreThanEmployees(context, 5);
+            
+            // 11. Find Latest 10 Projects
+            FindLatestNStartedProjects(context, 10);
         }
 
         static void PrintEmployeeesFullInfo(SoftUniContext context)
@@ -119,6 +135,119 @@ namespace EntitityFrameworkExersices
             foreach (string addressText in adrressesTexts)
             {
                 Console.WriteLine(addressText);
+            }
+        }
+
+        static void Print30EmployeesWithProjects(SoftUniContext context, int startYear, int endYear)
+        {
+            var employeesProjects = context.Employees
+                .Where
+                (
+                    e => e.EmployeesProjects.Any
+                    (
+                        ep => ep.Project.StartDate.Year >= startYear && ep.Project.StartDate.Year <= endYear
+                    )
+                )
+                .Take(30)
+                .Select(e => new
+                {
+                    employeeName = $"{e.FirstName} {e.LastName}",
+                    managerName = $"{e.Manager.FirstName} {e.Manager.LastName}",
+                    Projects = e.EmployeesProjects.Select(ep => new
+                    {
+                        ep.Project.Name,
+                        ep.Project.StartDate,
+                        ep.Project.EndDate
+                    })
+                });
+            foreach (var employeeProject in employeesProjects)
+            {
+                Console.WriteLine($"{employeeProject.employeeName} - Manager: {employeeProject.managerName}");
+                foreach (var project in employeeProject.Projects)
+                {
+                    Console.WriteLine($"--{project.Name} - " +
+                        $"{project.StartDate.ToString("M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture)} - " +
+                        $"{(project.EndDate.HasValue ? project.EndDate.Value.ToString("M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture) : "not finished")}");
+                }
+            }
+        }
+
+        static void PrintTop10AdressesOrdered(SoftUniContext context)
+        {
+            var orderedAddresses = context.Addresses
+                .Include(a => a.Town)
+                .Include(a => a.Employees)
+                .OrderByDescending(a => a.Employees.Count())
+                .ThenBy(a => a.Town.Name)
+                .ThenBy(a => a.AddressText)
+                .Take(10);
+
+            Console.WriteLine();
+            foreach (var address in orderedAddresses)
+            {
+                Console.WriteLine($"{address.AddressText}, {address.Town.Name} - {address.Employees.Count()} employees");
+            }
+        }
+
+        static void GetEmployeeInfoById(SoftUniContext context, int employeeId)
+        {
+            var employeesInfo = context.Employees
+                .Where(e => e.EmployeeId == employeeId)
+                .Select(e => new
+                {
+                    name = e.FirstName + " " + e.LastName,
+                    e.JobTitle,
+                    projects = e.EmployeesProjects.Select(ep => ep.Project).OrderBy(ep => ep.Name)
+                });
+
+            foreach (var employeeInfo in employeesInfo)
+            {
+                Console.WriteLine($"{employeeInfo.name} - {employeeInfo.JobTitle}");
+                foreach (var project in employeeInfo.projects)
+                {
+                    Console.WriteLine(project.Name);
+                }
+            }
+        }
+
+        static void PrintDepartmentWithMoreThanEmployees(SoftUniContext context, int employeesCount)
+        {
+            var departmentsManagersEmployees = context.Departments
+                .Where(d => d.Employees.Count() > employeesCount)
+                .Include(d => d.Manager).Include(d => d.Employees)
+                .OrderBy(d => d.Employees.Count())
+                .ThenBy(d => d.Name);
+
+            foreach (var departmentManagerEmployees in departmentsManagersEmployees)
+            {
+                string managerFullName = 
+                    $"{departmentManagerEmployees.Manager.FirstName} {departmentManagerEmployees.Manager.LastName}";
+
+                Console.WriteLine($"{departmentManagerEmployees.Name} - {managerFullName}");
+                foreach (var employees in departmentManagerEmployees.Employees
+                    .OrderBy(e => e.FirstName)
+                    .ThenBy(e => e.LastName))
+                {
+                    string employeeFullName = $"{employees.FirstName} {employees.LastName}";
+                    Console.WriteLine($"{employeeFullName} - {employees.JobTitle}");
+                }
+
+                Console.WriteLine(new string('-', 10));
+            }
+        }
+
+        static void FindLatestNStartedProjects(SoftUniContext context, int projectsCount)
+        {
+            var lastNProjects = context.Projects
+                .OrderByDescending(p => p.StartDate)
+                .Take(projectsCount)
+                .OrderBy(p => p.Name);
+
+            foreach (var project in lastNProjects)
+            {
+                Console.WriteLine(project.Name);
+                Console.WriteLine(project.Description);
+                Console.WriteLine(project.StartDate.ToString("M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture));
             }
         }
     }
