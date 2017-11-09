@@ -43,6 +43,17 @@ namespace EntitityFrameworkExersices
             
             // 11. Find Latest 10 Projects
             FindLatestNStartedProjects(context, 10);
+            
+            // 12. Increase Salaries
+            string[] departments = { "Engineering", "Tool Design", "Marketing", "Information Services"};
+            IncreaseEmployyeesSalary(context, departments);
+            
+            // 13. Find Employees by First Name Starting With Sa
+            PrintEmployeesInfoWhereFirstNameStartWith(context, "Sa");
+            
+            // 14. Delete Project by Id
+            DeleteProjectById(context, 2);
+            PrintFirstNProjects(context, 10);
         }
 
         static void PrintEmployeeesFullInfo(SoftUniContext context)
@@ -215,8 +226,7 @@ namespace EntitityFrameworkExersices
             var departmentsManagersEmployees = context.Departments
                 .Where(d => d.Employees.Count() > employeesCount)
                 .Include(d => d.Manager).Include(d => d.Employees)
-                .OrderBy(d => d.Employees.Count())
-                .ThenBy(d => d.Name);
+                .OrderBy(d => d.Employees.Count()).ThenBy(d => d.Name);
 
             foreach (var departmentManagerEmployees in departmentsManagersEmployees)
             {
@@ -225,8 +235,7 @@ namespace EntitityFrameworkExersices
 
                 Console.WriteLine($"{departmentManagerEmployees.Name} - {managerFullName}");
                 foreach (var employees in departmentManagerEmployees.Employees
-                    .OrderBy(e => e.FirstName)
-                    .ThenBy(e => e.LastName))
+                    .OrderBy(e => e.FirstName).ThenBy(e => e.LastName))
                 {
                     string employeeFullName = $"{employees.FirstName} {employees.LastName}";
                     Console.WriteLine($"{employeeFullName} - {employees.JobTitle}");
@@ -248,6 +257,59 @@ namespace EntitityFrameworkExersices
                 Console.WriteLine(project.Name);
                 Console.WriteLine(project.Description);
                 Console.WriteLine(project.StartDate.ToString("M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture));
+            }
+        }
+
+        static void IncreaseEmployyeesSalary(SoftUniContext context, string[] departments)
+        {
+            var emoloyees = context.Employees
+                .Where(e => departments.Any(d => d == e.Department.Name));
+
+            foreach (var employee in emoloyees.OrderBy(e => e.FirstName).ThenBy(e => e.LastName))
+            {
+                employee.Salary *= 1.12m;
+                string fullName = employee.FirstName + " " + employee.LastName;
+
+                Console.WriteLine($"{fullName} (${employee.Salary:f2})");
+            }
+
+            context.SaveChanges();
+        }
+
+        static void PrintEmployeesInfoWhereFirstNameStartWith(SoftUniContext context, string startWith)
+        {
+            var employees = context.Employees
+                .Where(e => e.FirstName.StartsWith(startWith))
+                .OrderBy(e => e.FirstName).ThenBy(e => e.LastName);
+
+            foreach (var employee in employees)
+            {
+                string fullName = employee.FirstName + " " + employee.LastName;
+                Console.WriteLine($"{fullName} - {employee.JobTitle} - (${employee.Salary:f2})");
+            }
+        }
+
+        static void DeleteProjectById(SoftUniContext context, int projectId)
+        {
+            var project = context.Projects.Where(p => p.ProjectId == projectId).First();
+            var employeesProjects = context.EmployeesProjects.Where(ep => ep.ProjectId == projectId);
+
+            context.EmployeesProjects.RemoveRange(employeesProjects);
+            context.Projects.Remove(project);
+
+            context.SaveChanges();
+        }
+
+        static void PrintFirstNProjects(SoftUniContext context, int projectsCount)
+        {
+            foreach (var project in context.Projects)
+            {
+                projectsCount--;
+                if (projectsCount < 0)
+                {
+                    return;
+                }
+                Console.WriteLine(project.Name);
             }
         }
     }
