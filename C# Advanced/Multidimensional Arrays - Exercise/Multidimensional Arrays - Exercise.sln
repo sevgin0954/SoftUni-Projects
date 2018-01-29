@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01. Matrix of Palindromes", "01. Matrix of Palindromes\01. Matrix of Palindromes.csproj", "{061DFD65-55F8-4564-A6D6-78CC59AEDF7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2. Diagonal Difference", "2. Diagonal Difference\2. Diagonal Difference.csproj", "{978DE844-3601-410F-B2AA-EBDF72B98966}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3. Squares in Matrix", "3. Squares in Matrix\3. Squares in Matrix.csproj", "{2CB9E3C9-C07C-473A-A641-F058F7751CEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{061DFD65-55F8-4564-A6D6-78CC59AEDF7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{061DFD65-55F8-4564-A6D6-78CC59AEDF7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{061DFD65-55F8-4564-A6D6-78CC59AEDF7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{061DFD65-55F8-4564-A6D6-78CC59AEDF7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{978DE844-3601-410F-B2AA-EBDF72B98966}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{978DE844-3601-410F-B2AA-EBDF72B98966}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{978DE844-3601-410F-B2AA-EBDF72B98966}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{978DE844-3601-410F-B2AA-EBDF72B98966}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CB9E3C9-C07C-473A-A641-F058F7751CEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CB9E3C9-C07C-473A-A641-F058F7751CEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CB9E3C9-C07C-473A-A641-F058F7751CEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CB9E3C9-C07C-473A-A641-F058F7751CEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8795297F-1460-45F9-BC89-3E3F1AE9513A}
+	EndGlobalSection
+EndGlobal
