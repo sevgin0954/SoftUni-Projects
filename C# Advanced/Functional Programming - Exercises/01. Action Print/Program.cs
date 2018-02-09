@@ -4,6 +4,9 @@ class Program
 {
     static void Main()
     {
-        string input = Console.ReadLine();
+        string names = Console.ReadLine();
+        Action<string> printNamesOnNewLine = (s) => Console.Write(string.Join(Environment.NewLine, s.Split(' ')));
+
+        printNamesOnNewLine(names);
     }
 }

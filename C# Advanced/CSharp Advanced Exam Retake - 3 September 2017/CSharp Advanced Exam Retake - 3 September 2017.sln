@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01. Dangerous Floor", "01. Dangerous Floor\01. Dangerous Floor.csproj", "{97DE09D4-E117-4EDC-92EF-D4539EC68808}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02. Crypto Master", "02. Crypto Master\02. Crypto Master.csproj", "{9B3C4540-2242-49E1-95FB-2E365659A883}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02. Crypto Master", "02. Crypto Master\02. Crypto Master.csproj", "{9B3C4540-2242-49E1-95FB-2E365659A883}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03. Greedy Times", "03. Greedy Times\03. Greedy Times.csproj", "{9A6191CE-5A7F-4E4D-B186-7848A793D42A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9B3C4540-2242-49E1-95FB-2E365659A883}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B3C4540-2242-49E1-95FB-2E365659A883}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B3C4540-2242-49E1-95FB-2E365659A883}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A6191CE-5A7F-4E4D-B186-7848A793D42A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A6191CE-5A7F-4E4D-B186-7848A793D42A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A6191CE-5A7F-4E4D-B186-7848A793D42A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A6191CE-5A7F-4E4D-B186-7848A793D42A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
