@@ -1,1 +1,1 @@
-# SoftUni-Projects
+# Online store similar to emag
